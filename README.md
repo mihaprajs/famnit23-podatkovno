@@ -21,7 +21,7 @@ The repository serves as a personal archive of all code written during the cours
     - `practice`
         - `lab` - Contains code we wrote during the lab practice.
           - `python` - Contains Python code.
-          - `r` - Contains R code.
+          - `R` - Contains R code.
 
 2. Organised code by dates (yyyy-mm-dd).
 
