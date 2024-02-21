@@ -26,7 +26,4 @@ The repository serves as a personal archive of all code written during the cours
 3. Optionally organised further to maintain a clean structure.
 
 ## Contirbutions
-This is a personal space, thus contributions or pull requests will most likely not be accepted. Template by [Matic Boncina](https://youtu.be/dQw4w9WgXcQ?si=cZSawPTZEe61KA_r).
-<!---
-(https://github.com/maticboncina).
---->
+This is a personal space, thus contributions or pull requests will most likely not be accepted. Template by [Matic Boncina](https://github.com/maticboncina).
