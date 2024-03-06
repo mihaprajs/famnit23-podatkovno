@@ -1,0 +1,294 @@
+---
+title: "Learning Quarto"
+date: "2024-01-01"
+subtitle: "The power of Quarto"
+author: "Jane Doe"
+abstract: "Quarto is a powerful tool for data science. We love Quarto!"
+keywords: "quarto, learning, great"
+format: 
+    html:
+      toc: true
+      toc-depth: 4
+      toc-location: left
+      mainfont: cursive
+      code-fold: show
+      embed-resources: false
+crossref:
+  tbl-prefix: 'Tabela'
+  tbl-title: 'Tabela'
+  fig-prefix: 'Slika'
+  fig-title: 'Slika'
+execute: 
+  warning: false
+  message: false
+  error: true
+  echo: true
+---
+
+# Uvod
+
+## Paketi
+
+```{r}
+library(tidyverse)
+library(knitr)
+library(gt)
+library(DT)
+```
+
+## Quarto
+
+**Quarto** enables you to weave together content and executable code into a finished document. To learn more about Quarto see <https://quarto.org>.
+
+## Running Code
+
+When you click the **Render** button a document will be generated that includes both content and the output of embedded code. You can embed code like this:
+
+```{r}
+1 + 1
+```
+
+You can add options to executable code like this
+
+```{r}
+#| echo: false
+2 * 2
+```
+
+The `echo: false` option disables the printing of code (only output is displayed).
+
+## Error code
+
+```{r}
+sqrt("a")
+```
+
+## Large chunk
+
+```{r}
+#| cache: true
+
+Sys.sleep(7)
+```
+
+
+## Supra mk4
+
+### Slika
+
+![supra](images/clipboard-1655168296.png){#fig-supra}
+Car at @fig-supra
+
+### Nekaj o ...
+
+-   fact
+-   fact
+
+#### naslov 4 ravni 1
+
+#### naslov 4 ravni 2
+
+| Leto | Mesec | Prodaja |
+|:----:|:-----:|:-------:|
+| 2022 |   1   |   100   |
+| 2023 |   2   |   200   |
+| 2024 |   3   |   300   |
+
+## Graf
+
+```{r}
+#| echo: true
+#| fig-width: 10
+#| fig-height: 6
+library(ggplot2)
+ggplot(mtcars, aes(hp, mpg, color = am)) +
+  geom_point() +
+  geom_smooth(formula = y ~ x, method = "loess")
+```
+
+## Stolpci
+
+::: columns
+::: {.column width="45%"}
+Left column
+:::
+
+::: {.column width="5%"}
+:::
+
+::: {.column width="50%"}
+Right column
+:::
+:::
+
+#### Kopirana tabela
+
+::: columns
+::: {.column width="35%"}
+#### Motor Trend Car Road Tests {.smaller   }
+
+The data was extracted from the 1974 Motor Trend US magazine, and comprises fuel consumption and 10 aspects of automobile design and performance for 32 automobiles.
+:::
+
+::: {.column width="3%"}
+:::
+
+::: {.column width="62%"}
+::: cell
+::: cell-output-display
+|                   |  mpg | cyl | disp |  hp |    wt |
+|:------------------|-----:|----:|-----:|----:|------:|
+| Mazda RX4         | 21.0 |   6 |  160 | 110 | 2.620 |
+| Mazda RX4 Wag     | 21.0 |   6 |  160 | 110 | 2.875 |
+| Datsun 710        | 22.8 |   4 |  108 |  93 | 2.320 |
+| Hornet 4 Drive    | 21.4 |   6 |  258 | 110 | 3.215 |
+| Hornet Sportabout | 18.7 |   8 |  360 | 175 | 3.440 |
+| Valiant           | 18.1 |   6 |  225 | 105 | 3.460 |
+:::
+:::
+:::
+:::
+
+## Stolpci 2 {.smaller}
+
+::: columns
+::: {.column width="50%"}
+```{r}
+airquality %>% 
+   head() %>% 
+   kable()
+```
+:::
+
+::: {.column width="50%"}
+```{r}
+airquality %>% 
+   head() %>% 
+   gt()
+```
+:::
+:::
+
+## Tabset
+
+::: {.panel-tabset}
+### kabel
+```{r}
+airquality %>% 
+   head() %>% 
+   kable()
+```
+### gt
+```{r}
+airquality %>% 
+   head() %>% 
+   gt()
+```
+### Datatable
+```{r}
+airquality %>% 
+   datatable()
+```
+:::
+
+## NE DELAJ TEGA!
+``` {r}
+mtcars
+```
+
+## DELAJ TAKO!
+```{r}
+mtcars %>%
+  datatable()
+```
+
+## Cross-reference 
+### CR- 1
+
+```{r}
+#| label: tbl-airquality1
+#| tbl-cap: "The airquality in New York in 1973"
+#| tbl-cap-location: bottom
+
+airquality %>% 
+   head() %>% 
+   gt()
+```
+
+In the table @tbl-airquality1 we collected data for 5 months.
+
+### CR - 2
+
+```{r}
+#| label: tbl-airquality2
+#| tbl-cap: "The airquality in New York in 1973"
+
+airquality %>% 
+   head() %>% 
+   gt()
+```
+
+### Slika
+
+```{r}
+#| label: fig-airquality
+#| fig-cap: "Ozone vs. temp"
+#| fig-cap-location: top
+
+airquality %>% 
+   dplyr::select(Ozone, Temp) %>% 
+   ggplot(., aes(x=Temp, y=Ozone))+
+   geom_point()
+```
+The chart @fig-airquality shows the relationship between Ozone and Temp.
+
+## Callout bloki
+::: {.callout-note}
+Note that there are five types of callouts, including:
+`note`, `warning`, `important`, `tip`, and `caution`.
+:::
+
+::: {.callout-tip}
+## Tip with Title
+
+This is an example of a callout with a title.
+:::
+
+::: {.callout-caution}
+## Caution
+
+Lalala
+:::
+
+::: {.callout-important}
+## Improtant
+
+very improtant
+:::
+
+::: {.callout-warning}
+## Standardization
+
+This is an example of a warning.
+:::
+
+
+## Interactive
+
+```{r}
+#| echo: false
+#| fig-height: 5
+library(leaflet)
+leaflet() %>%
+  addTiles() %>%  # Add default OpenStreetMap map tiles
+  addMarkers(lat=45.5490, lng=13.7276, popup="FAMINT")
+```
+
+
+## Python
+
+```{python}
+import pandas as pd
+
+```
+
