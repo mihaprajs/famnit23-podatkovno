@@ -142,3 +142,20 @@ m2[1:3,2]
 m2[]
 m2[,2]
 m2[,2,drop=F]
+
+# 15.3.2024
+m2[1:2,2:3]
+m2[-3,-1]
+m2[c(T,T,F),c(F,T,T)] # dostopanje z logičnimi vrednostmi (F -ne vrne stolpca, T -vrne stolpec)
+m2[1:2,2:3] <- 0
+m2
+m1[1,,drop=F]
+m1[-1,]<--5
+m4<-matrix(c("a","b","c","d"),2,2)
+m4
+m4<-matrix(c("a","b","c","d"),2,2,byrow = T)
+m4
+matrix(letters[1:4],2,2,byrow = T)
+m3
+cbind(m4,m3)
+m4;m3;cbind(m4,m3) # ko zdužimo matriko char in int vse vrednosti postanjeo char
