@@ -40,3 +40,42 @@ library(tidyverse) # da laho uporabimmi %>%
 l1$dataframe %>% head(2)
 l1$dataframe %>% head(.,2)
 2 %>% head(l1$dataframe,.)
+df1 %>% as.list() %>% as.data.frame()
+
+# C
+factor(c("moski","zenska","moski","moski"))
+factor(c("moski","zenska","moski","moski"))->df1$spol
+f1<-factor(c(1,2,3,1,2,3,2,0,3,4))
+levels(f1)
+summary(f1)
+factor(c("moski","zenska","moski","moski")) %>% summary()
+summary(f1)["3"]
+levels(f1)[3]<-"6" # zamenja vse vrednosti, ki se skladajo z vrednostjo zapisano na indexu v levelu
+datasets::airquality
+airquality %>% head()
+airquality %>% knitr::kable() %>% head()
+airquality %>% tibble()
+airquality %>% DT::datatable()
+airquality$Month
+factor(airquality$Month) %>% levels() %>% as.numeric()
+unique(airquality$Month) # isto kot vrsta višje
+factor(airquality$Month) %>% levels() %>% as.numeric() %>% month.name[.]
+month.name
+month.name[unique(airquality$Month)]
+mtcars %>% head()
+?mtcars
+mtcars$cyl
+unique(mtcars$cyl)
+length(unique(mtcars$cyl))
+
+# D
+vpH<-runif(100, 0, 14) # 100 naključnih vrednosti med 0 in 14
+cut(vpH,c(0,3,6,8,11,14),labels = c("s.acid","w.acid","neutral","w.base","s.base"))->f1
+f1 %>% summary() %>% .["s.acid"]
+
+otroci<-sample(0:6, 65, replace=T)
+sample(letters,10,replace = T)
+otroci %>% cut(c(-1,0,1,6),labels = c("0","1",">=2")) # otroci %>% cut(c(-inf,0,1,inf),labels = c("0","1",">=2"))
+otroci %>% cut(c(-1,0,1,6),labels = c("0","1",">=2"),ordered_result = T)->f2
+f1=="neutral" # f1>"neutral -> ne dela (delo s stringi)
+f2>"1" # Dela (delo z int)
