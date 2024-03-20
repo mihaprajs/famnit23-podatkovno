@@ -1,0 +1,1 @@
+Glej komentarje v skriptah
