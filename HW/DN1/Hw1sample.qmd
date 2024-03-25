@@ -13,13 +13,9 @@ execute:
   error: true
 ---
 
-
-
-
 ## Solutions
 
 Submit a **.html** file created using Quarto via e-classroom. A sample is attached. Display all code (packages,input) and output.
-
 
 Transform the dataframe **automobile**
 
@@ -27,9 +23,9 @@ Transform the dataframe **automobile**
 automobile<-mtcars
 ```
 
-1. Move rownames to a column **cars.name**, remove rownames.
-2. Add a column named **l/100km** whose values are based on column mpg, then delete column mpg.
-3. Change the **am** column to a factor with levels **Automatic** and **Manual**.
+1.  Move rownames to a column **cars.name**, remove rownames.
+2.  Add a column named **l/100km** whose values are based on column mpg, then delete column mpg.
+3.  Change the **am** column to a factor with levels **Automatic** and **Manual**.
 
 ```{r}
 # solve 1-3 here
@@ -38,7 +34,6 @@ automobile<-mtcars
 
 
 ```
-
 
 After the transformation display the data frame as a tibble then answer these questions independently.
 
@@ -49,16 +44,15 @@ normalpackages<-c("tidyverse","quarto")
    new.packages <- normalpackages[!(normalpackages %in% installed.packages()[,"Package"])]
   if(length(new.packages)>0) {install.packages(new.packages,dependencies =T,quiet = T)}
 ```
+
 ```{r}
 library(tidyverse)
 as.tibble(automobile)
 ```
 
-
-
-4. What is the average number of gears?
-5. Return the rows with cars with horsepower between 200 and 400.
-6. Which car is most fuel efficient car among 6 cylinder cars?
+4.  What is the average number of gears?
+5.  Return the rows with cars with horsepower between 200 and 400.
+6.  Which car is most fuel efficient car among 6 cylinder cars?
 
 ```{r}
 # solve 4-6 here
