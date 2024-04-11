@@ -1,0 +1,69 @@
+---
+title: "Data Programming"
+subtitle: "Homework 1"
+author: "Miha Prajs"
+date: "`r format(Sys.time(), '%e %B %Y')`"
+format: 
+  html:
+    embed-resources: true
+execute: 
+  warning: false
+  messages: false
+  echo: true
+  error: true
+---
+
+## Solutions
+
+Submit a **.html** file created using Quarto via e-classroom. A sample is attached. Display all code (packages,input) and output.
+
+Transform the dataframe **automobile**
+
+```{r}
+automobile<-mtcars
+library(tidyverse)
+```
+
+1.  Move rownames to a column **cars.name**, remove rownames.
+2.  Add a column named **l/100km** whose values are based on column mpg, then delete column mpg.
+3.  Change the **am** column to a factor with levels **Automatic** and **Manual**.
+
+```{r}
+# 1.
+automobile <- automobile %>% rownames_to_column(var = "cars.name")
+# 2.
+automobile$l_100km <- 235.2146/automobile$mpg
+automobile<-automobile %>% select(-mpg) 
+# 3.
+automobile$am <- factor(automobile$am,
+                        levels = c(0, 1),
+                        labels = c("Automatic", "Manual"))
+```
+
+After the transformation display the data frame as a tibble then answer these questions independently.
+
+```{r}
+#| echo: false
+#installs tidyverse and quarto if not done already, delete this chunk after running it once.
+normalpackages<-c("tidyverse","quarto")
+   new.packages <- normalpackages[!(normalpackages %in% installed.packages()[,"Package"])]
+  if(length(new.packages)>0) {install.packages(new.packages,dependencies =T,quiet = T)}
+```
+
+```{r}
+as.tibble(automobile)
+```
+
+4.  What is the average number of gears?
+5.  Return the rows with cars with horsepower between 200 and 400.
+6.  Which car is most fuel efficient car among 6 cylinder cars?
+
+```{r}
+# 4.
+average_gears<-mean(automobile$gear)
+# 5.
+horsepower_filtered <- automobile %>% .[.$hp >= 200 & .$hp <= 400,]
+# 6.
+most_fuel_efficient<-automobile %>% .[.$l_100km == min(.$l_100km) & .$cyl == 6,]
+
+```
