@@ -1,0 +1,70 @@
+---
+title: "Data Programming"
+subtitle: "Homework 2"
+author: "Miha Prajs"
+date: "`r format(Sys.time(), '%e %B %Y')`"
+format: 
+  html:
+    embed-resources: true
+execute: 
+  warning: false
+  messages: false
+  echo: true
+  error: true
+---
+
+## Solutions
+
+Submit a .html file created using Quarto via e-classroom. Display all code (packages, input) and output.
+
+Import the csv file from [https://www.kaggle.com/datasets/vishnuvarthanrao/windows-store](https://www.kaggle.com/datasets/vishnuvarthanrao/windows-store) (login is required). Parse the **Date** column into a date.
+
+```{r}
+library(tidyverse)
+df1<-read.csv("archive/msft.csv")
+df1<-df1 %>% mutate(Date=as.Date(Date,format="%d-%m-%Y"))
+df1 %>% as_tibble()
+```
+
+Careful with dealing with missing/NA data at the end. Some functions like sum, min, max have a **na.rm=T** option.
+
+```{r}
+
+```
+
+Answer these questions independentlty:
+
+1.  Display the dataframe as a tibble.
+2.  How long has the data been collected?
+3.  Among the highest rated apps return the 10 apps (rows) with the highest amount of reviews. Display only the first 3 columns.
+4.  Show the number of apps created per month.
+5.  Sort the rows of the dataframe from the least wordy to most wordy app name. Display the first 15.
+
+```{r}
+# 1.
+df1 %>% as_tibble()
+# 2.
+cas_pridobivanja_podatkov<-max(df1$Date,na.rm=T)-min(df1$Date,na.rm=T)
+cas_pridobivanja_podatkov
+
+# 3.
+najbolje_ocenjeni<-df1 %>%
+  filter(Rating==max(Rating,na.rm=T))
+najvec_ocen<-najbolje_ocenjeni %>%
+  arrange(desc(No.of.people.Rated)) %>%
+  slice(1:10) %>%
+  select(1:3)
+najvec_ocen
+
+# 4.
+st_apps_na_mesec<-df1 %>%
+  count(Month=month(Date,label=F)) %>%
+  pivot_wider(names_from=Month,values_from=n)
+names(st_apps_na_mesec)[names(st_apps_na_mesec)=="NA"]<-"NA's"
+st_apps_na_mesec %>% unlist()
+
+# 5.
+sortiraj<-df1 %>%
+  arrange(str_length(Name))
+sortiraj %>% head(15)
+```
