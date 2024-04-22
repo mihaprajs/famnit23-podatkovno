@@ -1,6 +1,6 @@
 # uvdoz parquet datoteke,
 library(arrow)
-df1<-read_parquet("./../2024-03-13/podatki/data.parquet")
+df1<-read_parquet("podatki/data.parquet")
 
 
 

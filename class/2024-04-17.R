@@ -17,7 +17,7 @@ df_person_region |> summarise(prodaja=sum(prodaja),
                               .by=c("region"))
 library(arrow)
 
-nyc<-read_parquet("/Users/mihap/Code/famnit23-podatkovno/class/2024-03-13/podatki/data.parquet")
+nyc<-read_parquet("podatki/data.parquet")
 
 nyc_payment_type<-nyc |> summarise(stevilo=n(),
                                    .by=c("payment_type","RatecodeID")) |> arrange(desc(stevilo))

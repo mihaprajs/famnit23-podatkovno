@@ -72,7 +72,7 @@ airquality %>%
   as_tibble()
 
 library(arrow)
-taksi<-read_parquet("C:/Users/mihap/Code/famnit23-podatkovno/class/2024-03-13/podatki/data.parquet")
+taksi<-read_parquet("podatki/data.parquet")
 
 # st vozenj po payment type
 taksi %>%

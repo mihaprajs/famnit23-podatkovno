@@ -1,11 +1,11 @@
 head(BT)
 tail(BT)
 
-df<-read_parquet("./podatki/data.parquet")
-write.csv(df, "./podatki/data.csv")
+df<-read_parquet("podatki/data.parquet")
+write.csv(df, "podatki/data.csv")
 
 start<-Sys.time()
-nyc<-read.csv("./podatki/data.csv")
+nyc<-read.csv("podatki/data.csv")
 Sys.time()-start
 
 
@@ -14,7 +14,7 @@ library(writexl)
 
 
 
-write_xlsx(airquality,"./podatki/airquality.xlsx")
+write_xlsx(airquality,"podatki/airquality.xlsx")
 
 
 
