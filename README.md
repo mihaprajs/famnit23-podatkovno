@@ -20,10 +20,7 @@ The repository serves as a personal archive of all code written during the cours
 
 1. Classification based on class type:
     - `class` - Contains code from lectures, that was written during the class.
-    - `practice`
-        - `lab` - Contains code we wrote during the lab practice.
-          - `python` - Contains Python code.
-          - `R` - Contains R code.
+    - `practice` - Contains code from lab practice
 
 2. Organised code by dates (yyyy-mm-dd).
 

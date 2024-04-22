@@ -12,12 +12,12 @@ mtcars %>%
   rename_with(~str_c("mtcars_",.,sep=""), starts_with("d")) %>%
   as_tibble()
 
-  # advanced
+# advanced
 df_renamed <- df %>% 
   rename_with(
     ~name_mapping_df$new_name[match(.x, name_mapping_df$old_name)],
     .cols = everything()
-    )
+  )
 
 df_renamed
 
@@ -74,12 +74,12 @@ airquality %>%
 library(arrow)
 taksi<-read_parquet("C:/Users/mihap/Code/famnit23-podatkovno/class/2024-03-13/podatki/data.parquet")
 
-  # st vozenj po payment type
+# st vozenj po payment type
 taksi %>%
   clean_names() %>%
   count(payment_type)
 
-  # povp znesek (total_amount) voznje in povp znesek voznje po dnevih
+# povp znesek (total_amount) voznje in povp znesek voznje po dnevih
 taksi %>%  
   summarise(povp = mean(total_amount))
 

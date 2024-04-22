@@ -79,3 +79,4 @@ otroci %>% cut(c(-1,0,1,6),labels = c("0","1",">=2")) # otroci %>% cut(c(-inf,0,
 otroci %>% cut(c(-1,0,1,6),labels = c("0","1",">=2"),ordered_result = T)->f2
 f1=="neutral" # f1>"neutral -> ne dela (delo s stringi)
 f2>"1" # Dela (delo z int)
+

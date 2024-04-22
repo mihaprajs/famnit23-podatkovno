@@ -22,7 +22,7 @@ nyc<-read_parquet("/Users/mihap/Code/famnit23-podatkovno/class/2024-03-13/podatk
 nyc_payment_type<-nyc |> summarise(stevilo=n(),
                                    .by=c("payment_type","RatecodeID")) |> arrange(desc(stevilo))
 nyc_payment_type |> summarise(stevilo=sum(stevilo),
-                                        .by="RatecodeID")
+                              .by="RatecodeID")
 nyc_payment_type<-nyc |>
   summarise(stevilo=n(),
             .by=c("payment_type","RatecodeID"))|>
@@ -101,8 +101,8 @@ warpbreaks |>
   )
 
 
-  # top_n(), sample_n(), sample_frac() -> stare fje niso relevantne
-  # v1.0.0: slice_min(), slice_max(), slice_head(), slice_tail(), slice_sample() -> nove fje
+# top_n(), sample_n(), sample_frac() -> stare fje niso relevantne
+# v1.0.0: slice_min(), slice_max(), slice_head(), slice_tail(), slice_sample() -> nove fje
 
 
 iris%>%top_n(2, wt=Petal.Width)

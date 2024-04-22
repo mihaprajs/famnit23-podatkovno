@@ -6,7 +6,7 @@ plot(x,y)
 lattice::xyplot(y~x)
 df<-data.frame(X=x,Y=y) 
 df |> ggplot()+aes(x=X,y=Y)+geom_point()
-  #paket1: miniUI, esquesse
+#paket1: miniUI, esquesse
 ggplot(df) +
   aes(x = X, y = Y) +
   geom_point(shape = "circle", size = 1.5, colour = "#112446") +
@@ -21,7 +21,7 @@ seq(-pi,pi,0.1) %>% plot(.,sin(.),type="l")
 plot(sin,-pi,pi)
 
 seq(-pi,pi,0.1) %>% data.frame(X=.,Y=sin(.)) %>% ggplot()+aes(x=X,y=Y)+geom_line()
-  # NAriši krožnico s polmerom 1 okoli izhodišča. Dodaj naslov in pre/poimenuj x- in y-os. Nariši še kvadrat na isto sliko.
+# NAriši krožnico s polmerom 1 okoli izhodišča. Dodaj naslov in pre/poimenuj x- in y-os. Nariši še kvadrat na isto sliko.
 seq(-pi,pi,0.1) %>% {plot(cos(.),sin(.),type="l",xlab="X-os",ylab="Y-os",main="NASLOV")}
 
 points(c(1,1,-1,-1,1),c(1,-1,-1,1,1),type="l",col="red")
@@ -75,16 +75,3 @@ coeff<-lm(iris$Petal.Width~iris$Petal.Length)
 coeff[[1]] # y=kx+n <- output (Intercept)=n, slope=k 
 ggplot(iris,aes(Petal.Length,Petal.Width,color=(Petal.Length*coeff[[1]][2]+coeff[[1]][1]>Petal.Width)))+geom_point()+geom_abline(intercept=coeff[[1]][1],slope=coeff[[1]][2])+
   labs(color = "Below the regression line?",title="Is there a correlation between petal length and width?")
-
-
-
-
-
-
-
-
-
-
-
-
-

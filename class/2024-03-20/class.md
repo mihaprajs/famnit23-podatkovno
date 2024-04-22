@@ -1,1 +1,0 @@
-Glej komentarje v skriptah

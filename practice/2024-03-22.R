@@ -10,7 +10,7 @@ order(c("b","d","a","c"))
 v<-c("b","d","a","c")
 v[order(v)]
 f1[order(f1)]
-  # pipa |> ali %>% -> potrebuje library(tidyverse)
+# pipa |> ali %>% -> potrebuje library(tidyverse)
 sum(1:4)
 1:4 |> sum()
 library(tidyverse)
@@ -18,7 +18,7 @@ library(tidyverse)
 1:12 %>% matrix(3,4)
 3 %>% matrix(1:12,.,4)
 4 %>% matrix(1:12,3,.)
-  # pikico lahko uprabimo več kot enkrat
+# pikico lahko uprabimo več kot enkrat
 4 %>% matrix(1:12,12/.,.)
 4 %>% matrix(1:12,12/.,4)
 4 %>% {matrix(1:12,12/.,4)} # ustavimo privzeto nastavitev, da gre argument na prvo mesto
@@ -32,12 +32,12 @@ iris %>% str()
 iris$Species %>% levels() # == iris$Species %>% levels(.)
 iris$Species=="setosa"
 iris[iris$Species=="setosa" & iris$Petal.Length<1.5,]
-  # DON'T DO: iris$Species="setosa" -> povozi originalne podatke
+# DON'T DO: iris$Species="setosa" -> povozi originalne podatke
 iris %>% .[.$Species=="setosa" & .$Petal.Length<1.5,]
 airquality %>% head()
 airquality %>% .[.$Temp >=50 & .$Temp <=60,]
 airquality %>% .[.$Wind >15/1.609,c("Wind","Day","Month")]
-  # E: 1. naloga sampel, letters, LETTERS, paste/stringr::str_c
+# E: 1. naloga sampel, letters, LETTERS, paste/stringr::str_c
 paste(LETTERS,letters,sep = "")
 paste(letters,collapse = ".")
 paste(sample(LETTERS[-c(1,5,9,15,21)],50,replace = T,),
@@ -52,8 +52,8 @@ letters[-c(1,5,9,15,21)] # -> najde samo sogalsnike
 1:4 %in% 3:6 # %>% za vsak element na levi pogleda če je na desni in vže true ali false
 c(F,T) & c(T,T) # && ne dela vedno uporabi le EN (1) "&"
 1:4 %>% {.+1} %>% sum()
-  # getwd() v scripti vrne dir v katerem je projekt
-  # getwd() v .qmd vrne dir v katerem je file
+# getwd() v scripti vrne dir v katerem je projekt
+# getwd() v .qmd vrne dir v katerem je file
 
 # A
 dir(recursive = T)
@@ -69,3 +69,4 @@ df1[df1$Country.Region=="Slovenia",1:6]
 df1 %>% .[.$Country.Region=="Slovenia",c(1:4,ncol(.))]
 df1 %>% .[.$Country.Region=="Slovenia",c(1:4,ncol(.)-6:0)]
 df1 %>% .[.$Country.Region=="Slovenia",c(1:4,ncol(.)-6:0)] %>% write.csv("DataVaje/CovidSlo")
+

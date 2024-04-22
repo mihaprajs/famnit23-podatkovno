@@ -30,18 +30,18 @@ df4<-rbind(df1,df2)
 
 # ODMOR
 
-  #base R
+#base R
 paste(2, "je najmanjše praštevilo")
 paste0(2, "je najmanjše praštevilo")
 paste(2, "je najmanjše praštevilo", sep="")
 paste0(2, " je najmanjše praštevilo")
 
-  #tidyverse
+#tidyverse
 str_c(2, "je najmanjše praštevilo")
 
 str_c("Beautiful",NA, sep=" ")
 paste("Beautiful",NA, sep=" ") #base R
-  #predpona str_ za funk. iz packagea stringr
+#predpona str_ za funk. iz packagea stringr
 for (i in 1:10) {
   
   res<-ifelse(i%%2==0,"sodo", "liho")

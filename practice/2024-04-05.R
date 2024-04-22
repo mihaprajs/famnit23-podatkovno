@@ -1,6 +1,6 @@
 # vaje 4B3
 library(tidyverse)
-readxl::read_excel("C:/Users/mihap/Code/famnit23-podatkovno/practice/R/2024-03-29/Sample - Superstore.xls")->store
+readxl::read_excel("DataVaje/Sample - Superstore.xls")->store
 store %>% {.$`Ship Date` - .$`Order Date`}
 store %>% {as.Date(.$`Ship Date`) - as.Date(.$`Order Date`)}
 store %>% {difftime(.$`Ship Date`,.$`Order Date`,units = "days")}->store$`Order Delay`
@@ -35,7 +35,7 @@ himna %>% str_split(" |\n") %>% unlist() %>% length()
 himna %>% str_count(".") # ne prešteje \n
 himna %>% nchar()
 # dir(recursive=",patteren="word") %>% read.csv()->word
-("C:/Users/mihap/Code/famnit23-podatkovno/practice/R/2024-03-29/word.txt") %>% read.csv()->word
+("DataVaje/word.txt") %>% read.csv()->word
 word %>% .[grep("age",.[,1]),]
 word$X2 %>% str_view("age")
 word$X2 %>% strsplit("") %>% unlist() %>% tolower() %>% factor() %>% summary() %>% .[order(-.)]
@@ -69,7 +69,3 @@ jeNaravno2<-\(x){if (is.numeric(x)){
 c(4,1,0,-2,3.4,"aa") %>% jeNaravno2()
 
 1:5 %>% sapply(fakulteta)
-
-
-
-

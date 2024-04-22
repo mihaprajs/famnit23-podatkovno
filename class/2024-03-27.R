@@ -126,6 +126,6 @@ vsota_razlika(20,10)$difference
 
 lapply(list(1,2,3), function(x) { 3 * x })
 sapply(sample(10,10,replace = T),
-  function(x) ifelse(x%%2==0,T,F))
+       function(x) ifelse(x%%2==0,T,F))
 
 mapply(function(x,y,z) { 3 * x*y*z},list(1,2,3),MoreArgs=list(y=2,z=3))
