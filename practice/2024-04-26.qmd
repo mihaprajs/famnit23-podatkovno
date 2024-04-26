@@ -1,0 +1,219 @@
+---
+title: "2024-04-26"
+author: "Miha"
+format:
+  html:
+    embed-resources: true
+execute: 
+  warning: false
+  messages: false
+  echo: true
+  error: true
+editor: 
+  markdown: 
+    wrap: 72
+---
+
+## Heading 2
+
+prvi odstavek prvi odstavek
+
+drugi odstavek
+
+### Heading 3
+
+lala
+
+## Sintaxa
+
+Opcije izpisa napak (obstaja več načinov):
+
+1.  način (globalno)
+
+```{r setup, echo=T}
+knitr::opts_chunk$set(echo = T,message=F,warning=F,error=T)
+```
+
+2.  način (for each chunk)
+
+```{r, error=T}
+# {r, error=T}
+```
+
+3.  način - v headu (globalno)
+
+```{r}
+c("Ford","Volvo","BMW")
+```
+
+```{python}
+cars = ["Ford","Volvo","BMW"]
+x = cars[0]
+x
+```
+
+```{r}
+#| error: true
+3 + "a"
+library(tidyverse)
+1:5 %>% sum()
+3+4->a
+```
+
+#### inline chunk 1
+
+`r a` ali pa kar izračunamo direkt `r 4+7`
+
+```{r}
+getwd() #pokaže kje je .qmd file
+```
+
+#### Listing
+
+-   a
+
+-   b
+
+    -   b.1
+    -   b.2
+
+    ```         
+    stil part of subset
+    ```
+
+    1.  1st subnumbering
+    2.  2nd subnumbering
+
+1.  1st numbering
+2.  2nd numbering - numbering is automatic
+
+#### superscript in subscript in latex:
+
+-   $a_2^3$ - \$ a_2\$ in \$a_2 \$ ne dela! Obvezno brez presledkov
+-   tako${}^{2024}$
+
+#### Links
+
+link <https://oeis.org/wiki/List_of_LaTeX_mathematical_symbols> [click
+me](https://oeis.org/wiki/List_of_LaTeX_mathematical_symbols)
+
+#### Figure
+
+```{r}
+#| label: fig-ggplot
+#| fig-cap: ggplot
+library(tidyverse)
+ggplot(iris)+
+  geom_point(aes(x=Petal.Length,y=Petal.Width))
+```
+
+See @fig-ggplot *\<- referenca na figuro*
+
+"Rmarkdown" način - se ne da referencirat:
+
+![](https://upload.wikimedia.org/wikipedia/commons/thumb/8/8a/Banana-Single.jpg/220px-Banana-Single.jpg)
+lahko crossreferenciramo:
+
+```{r}
+#| label: fig-plot
+#| fig-cap: Famnit logo
+knitr::include_graphics("https://www.famnit.upr.si/img/famnit_logo_big.png")
+```
+
+| Col1 | Col2 | Col3 |
+|------|------|------|
+|      |      |      |
+|      |      |      |
+|      |      |      |
+
+: Naslov tabele {#tbl-prazna}
+
+See @tbl-prazna
+
+See @fig-plot
+
+```{r}
+mtcars %>% DT::datatable(options = list(scrollx = T))
+```
+
+```{r}
+#| label: tbl-iris
+#| tbl-cap: "Iris Data"
+knitr::kable(head(iris))
+```
+
+See @tbl-iris
+
+
+:::: {.columns}
+
+::: {.column width="50%"}
+Left column
+:::
+
+::: {.column width="50%"}
+Right column
+:::
+
+::::
+
+
+#### Font with color
+
+<p style="color:red">
+red colored text
+</p>
+
+::: {.panel-tabset}
+#### EN
+
+english
+
+::: {.panel-tabset}
+##### 1
+  a
+  
+##### 2
+  b
+:::
+
+
+:::
+
+
+#### Spoiler
+<details open>
+
+<summary>Spoiler alert!</summary>
+
+A bear walks into a bar and says, "Give me a whiskey and ... cola." "Why
+the big pause?" asks the bartender. The bear shrugged. "I'm not sure; I
+was born with them."
+
+</details>
+
+#### Math formulas with LaTeX:
+
+This is a math equation $a^2+b^2=c^2$, and here is another one $$\sum_{i=1}^ni=\frac{n\cdot(n+1)}{2}.$$ It uses LaTeX  notation, in which various commands that starts with \\, arguemnts are enclosed in \{\} and math mode both starts and ends with with \$ (or \$\$). Carefull, dont leave space after the first $ and before the second $.
+
+Symbols that should work: <https://oeis.org/wiki/List_of_LaTeX_mathematical_symbols>
+
+$$|x|=\begin{cases}
+x & x>0 \\
+-x & \text{otherwise}
+\end{cases}$$
+
+#### Inline verbatim with LaTeX
+
+"Quotation marks are translated as such",
+if we want to make a copypastable code inside a sentence $\verb+v<-"copypastable"+$ we may do the above
+
+Set the start/end symbol to be one that you do not use in the rest of the kode $\verb*1+2+3*$.
+
+You may also use a chunk but it will not be inline.
+```{r, eval=F}
+v<-"copypastable"
+```
+
+
+

@@ -1,0 +1,22 @@
+---
+title: "Bibliografija"
+format:
+  html:
+    embed-resources: true  
+editor: visual
+bibliography: imedatoteke.bib
+---
+
+instaliraj citation package
+
+```{r, error=T}
+install.packages("citation")
+```
+
+V članku [@redek2016] ... in v knjigi [@fundamen] ...
+
+V [@waller2010statistics] ...
+
+![](https://upload.wikimedia.org/wikipedia/commons/thumb/8/8a/Banana-Single.jpg/220px-Banana-Single.jpg)
+
+## Reference
