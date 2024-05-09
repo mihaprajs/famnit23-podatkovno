@@ -1,0 +1,86 @@
+---
+title: "Data Programming"
+subtitle: "Homework 3"
+author: "Miha Prajs"
+date: "`r format(Sys.time(), '%e %B %Y')`"
+format: 
+  html:
+    embed-resources: true
+execute: 
+  warning: false
+  messages: false
+  echo: true
+  error: true
+---
+
+# 1
+Narišite črtni grafikon z ggplot-om temperature tekom časa drug ob drugem za vgrajena podatkovna okvirja **beaver1** in **beaver2**. Dodajte naslov in enote na Y osi za temperaturo.
+
+```{r}
+library(tidyverse)
+beaver1$time<-as.POSIXct(beaver1$time)
+beaver2$time<-as.POSIXct(beaver2$time)
+df<-{data.frame(X=c(beaver1$time,beaver2$time),
+                Y=c(beaver1$temp,beaver2$temp),
+                data.frame=c("beaver1","beaver2"))}
+ggplot(df,aes(x=X,y=Y,group=data.frame,color=data.frame))+
+  geom_line()+
+  labs(title="Temperature of beavers over time",x="",y="Temperature (°C)")+
+  facet_wrap(vars(data.frame))
+```
+
+
+# 2
+Dane so vrednosti 1 EUR v nekaterih valutah:
+```{r}
+c(EUR=1,datasets::euro)
+```
+Napišite funkcijo dveh parametrov:
+
+1. imenovani numerični vektor, katerega vrednosti predstavljajo količino valute v ustreznem imenu,
+2. (neobvezni parameter) valuta za pretvorbo.
+
+Vrnite skupno količino denarja iz vektorja 1. kot valuto, navedeno v 2. Če valuta ni navedena kot drugi parameter, vrni vrednost v EUR. Če valuta iz 1. ne obstaja, ta del vektorja prinese 0 k končnem rezultatu. Če valuta iz 2. ne obstaja, vrni 0. Zaženite svoj program na naslednjih primerih:
+
+```{r}
+convert.all<-function(kolicina,valuta="EUR") {
+  tecaj<-c(EUR=1,datasets::euro)
+  vsota1<-as.numeric(sum(kolicina/tecaj[names(kolicina)],na.rm=T))
+  if (valuta %in% names(tecaj)) {
+    return(as.numeric(vsota1*tecaj[valuta]))
+  } else {
+    return(0)
+  }
+}
+```
+
+
+
+```{r}
+convert.all(c(EUR=6.5))
+```
+
+```{r}
+convert.all(c(EUR=3,ATS=2))
+```
+
+```{r}
+convert.all(c(EUR=3,EUR=2))
+```
+
+```{r}
+convert.all(c(EUR=3,DEM=2,SIT=10000))
+```
+
+```{r}
+convert.all(c(EUR=3,DEM=2,SIT=10000),"EUR")
+```
+
+```{r}
+convert.all(c(EUR=3,DEM=2,SIT=10000),"ESP")
+```
+
+```{r}
+convert.all(c(EUR=3,DEM=2,LIRA=100),"SIT")
+```
+
