@@ -1,0 +1,115 @@
+1.) Modify the code below to make the points larger squares and slightly transparent.
+See `?geom_point` for more information on the point layer.
+
+```{r}
+ggplot(faithful,aes(x = eruptions, y = waiting)) + 
+  geom_point(size=3,shape=15,alpha=0.2)
+```
+
+Hint: transparency is controlled with `alpha`, and shape with `shape`
+
+
+2.)
+
+Colour the two distributions in the histogram with different colours
+
+```{r}
+ggplot(faithful) + 
+  geom_histogram(aes(x = eruptions))
+```
+
+Hint 1: For polygons you can map two different colour-like aesthetics: `colour` 
+(the colour of the stroke) and `fill` (the fill colour)
+
+3.)
+
+Colour the distributions in the histogram by whether `waiting` is above or below 
+`60`. What happens?
+
+```{r}
+ggplot(faithful) + 
+  geom_histogram(aes(x = eruptions))
+```
+
+Change the plot above by setting `position = 'dodge'` in `geom_histogram()` 
+(while keeping the colouring by `waiting`). 
+
+4.)
+Add a line that separates the two point distributions. See `?geom_abline` for 
+how to draw straight lines from a slope and intercept.
+
+```{r}
+ggplot(faithful) + 
+  geom_point(aes(x = eruptions, y = waiting))
+```
+
+5.)
+Use `stat_summary()` to add a red dot at the mean `hwy` for each group
+
+```{r}
+ggplot(mpg) + 
+  geom_jitter(aes(x = class, y = hwy), width = 0.2)
+```
+
+Hint: You will need to change the default geom of `stat_summary()`
+
+6.)
+Use `RColorBrewer::display.brewer.all()` to see all the different palettes from
+Color Brewer and pick your favourite. Modify the code below to use it
+
+```{r}
+ggplot(mpg) + 
+  geom_point(aes(x = displ, y = hwy, colour = class)) + 
+  scale_colour_brewer(type = 'qual')
+```
+
+7.)
+Modify the code below to create a bubble chart (scatterplot with size mapped to
+a continuous variable) showing `cyl` with size. Make sure that only the present 
+amount of cylinders (4, 5, 6, and 8) are present in the legend.
+
+```{r}
+ggplot(mpg) + 
+  geom_point(aes(x = displ, y = hwy, colour = class)) + 
+  scale_colour_brewer(type = 'qual')
+```
+
+Hint: The `breaks` argument in the scale is used to control which values are
+present in the legend.
+
+8.)
+One of the great things about facets is that they share the axes between the 
+different panels. Sometimes this is undiserable though, and the behaviour can
+be changed with the `scales` argument. Experiment with the different possible
+settings in the plot below:
+
+```{r}
+ggplot(mpg) + 
+  geom_point(aes(x = displ, y = hwy)) + 
+  facet_wrap(~ drv)
+```
+
+9.)
+Usually the space occupied by each panel is equal. This can create problems when
+different scales are used. Modify the code below so that the y scale differs 
+between the panels in the plot. What happens?
+
+```{r}
+ggplot(mpg) + 
+  geom_bar(aes(y = manufacturer)) + 
+  facet_grid(class ~ .)
+```
+
+Use the `space` argument in `facet_grid()` to change the plot above so each bar 
+has the same width again.
+
+HINT: space works only when scales are applied
+
+10.)
+In the same way as limits can be set in both the positional scale and the coord,
+so can transformations, using `coord_trans()`. Modify the code below to apply a
+log transformation to the y axis; first using `scale_y_continuous()`, 
+and then using `coord_trans()`. Compare the results ? how do they differ?
+
+ggplot(mpg) + 
+  geom_point(aes(x = hwy, y = displ))
