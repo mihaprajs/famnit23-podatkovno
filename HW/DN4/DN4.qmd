@@ -1,0 +1,90 @@
+---
+title: "Glive"
+subtitle: "Domača naloga 4 - Znanstvena raziskava"
+author: "Miha Prajs"
+date: "`r format(Sys.time(), '%e %B %Y')`"
+format: 
+  html:
+    embed-resources: true
+execute: 
+  warning: false
+  messages: false
+  echo: true
+  error: true
+bibliography: gradivo.bib
+---
+Glive so starodavni in raznovrstni mikroorganizmi. So heterotrofni, prehranjujejo s lahko na simbionten, saprofitski ali parazitski način, uvščamo pa jih med evkarionte. Molekularni preizkusi kažejo, da so je skupni prednih+k gliv živel že v predkambriju [@carlile2001fungi].
+```{r}
+#| label: fig-goba
+#| fig-cap: Gliva
+knitr::include_graphics("https://upload.wikimedia.org/wikipedia/commons/thumb/d/dd/Omphalotus_nidiformis_Binnamittalong_2_email.jpg/220px-Omphalotus_nidiformis_Binnamittalong_2_email.jpg")
+
+```
+
+## Zgradba gliv
+**Glive** imajo vegetativno telo, ki je lahko zelo reducirano, nemicelijsko, nitasto ali okroglasto. Telo ločimo na površinsko ([Slika @fig-goba]) in notranje podgobje. Napram notranjem podgobju, se površinsko podgobje bolj razrašča in ima debelejše hife. Osnovni gradnik gliv je celica, le ta pa je sestavljena iz celične stene, celične membrane in protoplasta – citoplazme z ograneli. V citoplazmi se nahaja več organelov:
+
+ - Jedro
+ - Mitohondriji
+ - Ribosomi
+ - Endoplazemski retikulum
+ - Vakuola
+
+<p style="color:red">V glivnih celicah najdemo podobnosti tako rastlinskim kot živalskim celicam, bistvena razlika v glivah pa je vsebnost hitina v celični steni. Tega najdemo le v še pri členonožcih [@Jenišek_2007].</p>
+
+## Tokisčnost gliv
+
+### Mikotoksini gliv
+Šele v zadnjih 30 letih je bilo odkrito, da pogosto prisotne glive, ki rastejo v živilih, proizvajajo toksine, znane kot mikotoksini. V zgodovini so te toksini privedli do večjih epidemij tako pri ljudeh kot pri živalih. Mikotoksini so sekunadarni metaboliti, to pomeni, da nimajo nobene funkcije pri normalnem razvoju in rasti glive. So majhne molekule, ki jih človeški imunski sistem ne more zaznati. Glavna nevarnost v človeški prehrani torej izhaja iz naše nezmožnosti zaznave teh mikotoksinov. Toksični so lahko na štiri osnovne načine: akutna toksičnost, kronična toksičnost, mutagenost in teratogenost. Simptomi mikotoksinov so skoraj tako raznovrstni kot je raznovrstna njihova kemijska struktura, saj so lahko sestavljeni iz enega heterocikličnega obroča ali pa iz šest do osem neurejenih obročev. Nekateri mikotoksini lahko povzročijo malo simptomov pred smrtjo osebka, nekateri pa povzročijo *raka* [@pitt2000toxigenic].
+
+### Uvoz podatkov
+S pomočjo spodnje kode so bili uvoženi podatki in knjižnice, ki so bile upodabljene pri izdelavi domače naloge.
+```{r}
+libs<-c("janitor","writexl","tidyverse")
+lapply(libs,library,character.only=T)
+df<-read.csv("archive/mushroom_cleaned.csv")
+```
+
+
+### Analiza podatkov
+```{r}
+df <- df %>%
+  clean_names() %>%
+  rename(premer_klobuka=cap_diameter,oblika_klobuka=cap_shape,pritrditev_hif=gill_attachment,barva_hif=gill_color,visina_beta=stem_height,sirina_beta=stem_width,barva_beta=stem_color,sezona=season,strupenost=class)
+df %>%
+  select('Višina beta'=visina_beta,'Širina beta'=sirina_beta) %>%
+  as_tibble() %>%
+  head(20)
+```
+Podatke iz zgornje tabele smo prikazali s pomočjo spodnjega grafa.
+
+```{r}
+#| label: fig-ggplot
+#| fig-cap: Širina beta v odvisnosti od višine beta
+df %>%
+  head(20) %>%
+  ggplot()+
+  aes(y=visina_beta,x=sirina_beta)+
+  geom_point()+
+  xlab('Širina beta [mm]') +
+  ylab('Višina beta [cm]')
+```
+```{r}
+column1<-df %>%
+  summarise('Širina beta'=mean(sirina_beta))
+column2<-df %>%
+  summarise('Višina beta'=mean(visina_beta))
+```
+|Širina beta|Višina beta|
+|-----------|-----------|
+|`r column1`|`r column2`|
+: Povprečje širine in višine betov {#tbl-tabela1}
+
+S pomočjo formule: $$\frac{širina\ beta}{višina\ beta}=\frac{1}{x}$$ lahko izračunamo povprečje razmerje med širino in višino beta posameznih gob. 
+
+S formulo $$\overline{x}=\frac{1}{n} \sum_{i=1}^{n} x_{i}$$ izračunamo povprečje vseh vrednosti posameznih spremenljivk (glej [Tabelo @tbl-tabela1]).
+
+## Opombe
+Podatkovni okvir oz. "data frame" je bil pridobljen na spletni povezavi: <https://www.kaggle.com/datasets/prishasawhney/mushroom-dataset>, 14. maja 2024.
+
+## Viri

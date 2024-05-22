@@ -1,0 +1,29 @@
+Glive so starodavni in raznovrstni mikroorganizmi. So heterotrofni, prehranjujejo s lahko na simbionten, saprofitski ali parazitski način, uvščamo pa jih med evkarionte. Molekularni preizkusi kažejo, da so je skupni prednih+k gliv živel že v predkambriju [@carlile2001fungi].
+## Zgradba gliv
+**Glive** imajo vegetativno telo, ki je lahko zelo reducirano, nemicelijsko, nitasto ali okroglasto. Telo ločimo na površinsko ([Slika @fig-goba]) in notranje podgobje. Napram notranjem podgobju, se površinsko podgobje bolj razrašča in ima debelejše hife. Osnovni gradnik gliv je celica, le ta pa je sestavljena iz celične stene, celične membrane in protoplasta – citoplazme z ograneli. V citoplazmi se nahaja več organelov:
+
+ - Jedro
+ - Mitohondriji
+ - Ribosomi
+ - Endoplazemski retikulum
+ - Vakuola
+
+<p style="color:red">V glivnih celicah najdemo podobnosti tako rastlinskim kot živalskim celicam, bistvena razlika v glivah pa je vsebnost hitina v celični steni. Tega najdemo le v še pri členonožcih [@Jenišek_2007].</p>
+
+Tokisčnost gliv
+
+Mikotoksini gliv
+Šele v zadnjih 30 letih je bilo odkrito, da pogosto prisotne glive, ki rastejo v živilih, proizvajajo toksine, znane kot mikotoksini. V zgodovini so te toksini privedli do večjih epidemij tako pri ljudeh kot pri živalih. Mikotoksini so sekunadarni metaboliti, to pomeni, da nimajo nobene funkcije pri normalnem razvoju in rasti glive. So majhne molekule, ki jih človeški imunski sistem ne more zaznati. Glavna nevarnost v človeški prehrani torej izhaja iz naše nezmožnosti zaznave teh mikotoksinov. Toksični so lahko na štiri osnovne načine: akutna toksičnost, kronična toksičnost, mutagenost in teratogenost. Simptomi mikotoksinov so skoraj tako raznovrstni kot je raznovrstna njihova kemijska struktura, saj so lahko sestavljeni iz enega heterocikličnega obroča ali pa iz šest do osem neurejenih obročev. Nekateri mikotoksini lahko povzročijo malo simptomov pred smrtjo osebka, nekateri pa povzročijo *raka* [@pitt2000toxigenic].
+
+Uvoz podatkov
+S pomočjo spodnje kode so bili uvoženi podatki in knjižnice, ki so bile upodabljene pri izdelavi domače naloge.
+
+Analiza podatkov
+Podatke iz zgornje tabele smo prikazali s pomočjo spodnjega grafa.
+
+S pomočjo formule: $$\frac{širina\ beta}{višina\ beta}=\frac{1}{x}$$ lahko izračunamo povprečje razmerje med širino in višino beta posameznih gob. 
+
+S formulo $$\overline{x}=\frac{1}{n} \sum_{i=1}^{n} x_{i}$$ izračunamo povprečje vseh vrednosti posameznih spremenljivk (glej [Tabelo @tbl-tabela1]).
+
+Opombe
+Podatkovni okvir oz. "data frame" je bil pridobljen na spletni povezavi: <https://www.kaggle.com/datasets/prishasawhney/mushroom-dataset>, 14. maja 2024.
