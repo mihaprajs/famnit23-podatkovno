@@ -29,4 +29,14 @@ str_count(knjige$text,"darcy") |>
   sum()
 
 library(tidytext)
-str_split(knjige$text,pattern="[ ]")[1:10]
+besede<-str_split(knjige$text,pattern="\\W") |>
+  list_c()
+length(besede[nchar(besede)>0])
+df<-besede[nchar(besede)>0] |>
+  tolower() |>
+  as.data.frame()
+colnames(df)<-"beseda"
+df |>
+  dplyr::filter(nchar(beseda)>3) |>
+  count(beseda,sort=T) |>
+  head(20)
