@@ -1,0 +1,127 @@
+---
+title: "Izpit Podatkovno Programiranje (90 min)"
+author: "Ime in priimek"
+date: "`r Sys.Date()`"
+output: 
+  html_document: 
+    toc: yes
+    toc_float: yes
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set()
+
+```
+
+## Uvod
+
+Oddana naloga mora biti pretvorjena v html, kjer je razvidna koda in rezultat kode. Drugih oblik oddaje ne bom upošteval!!!
+
+## Naloga 1 (3 tocke)
+
+Naključno generirajte 100 **celih** števil med -40 in 40. Prikažite porazdelitev vrednosti s histogramom. Histogram naj ima naslov "Porazdelitev nakljucnih vrednosti".
+```{r}
+library(tidyverse)
+sample(-40:40,100,replace=T) %>%
+  data.frame(A=.) %>%
+  ggplot()+
+  aes(x=A)+
+  geom_bar()+
+  labs(title="Porazdelitev nakljucnih vrednosti")
+```
+
+
+
+## Naloga 2 (3 tocke)
+
+Nakljucno generirajte 1000 **celih** stevil med 1 ter 10000. Koliko stevil je lihih in koliko je sodih?
+```{r}
+sample(1:10000,1000,replace=T) %>%
+  {c(Soda=length(.)-sum(.%%2),Liha=sum(.%%2))}
+  
+```
+
+
+
+## Naloga 3 (5 tock)
+
+S pomocjo funkcije letters generirajte besedo s 50 crkami. Beseda ne sme biti sestavljena samo iz ene crke!!! S stolpicnim grafom prikazite frekvenco posameznih crk.
+
+```{r}
+letters %>%
+  sample(50,replace=T) %>%
+  paste(collapse = "") %>%
+  {print(.);.} %>%
+  str_split("") %>%
+  unlist() %>% 
+  data.frame(A=.) %>%
+  ggplot()+
+  aes(x=A)+
+  geom_bar()
+```
+
+
+## Naloga 4 (3 tocke)
+
+Pretvorite data.frame grades is wider to longer obliko s pomocjo funkcije pivot_longer, kjer bosta stolpca math ter history shranjena v stolpec z imenom "predmet", ocene pa v stolpcu z imenom "ocena".
+
+```{r}
+grades <- data.frame(names = c("John", "Juan", "Jean", "Yao"), 
+                     math = c(95, 80, 90, 85), 
+                     history = c(90, 85, 85, 90))
+grades %>%
+  pivot_longer(math:history,names_to="predmet",values_to="ocena")
+```
+
+## Naloga 5 (5 tock)
+
+Namestite paket library("dslabs") ter ga nalozite v pomnilnik. S tem boste pridobili dostop do data.frame murders. S pomocjo tidyverse slovnice odgovorite na naslednja vprasanje, in sicer, kaksen je odstotek umorov glede na populacijo po regijah. Rezultate razvrstite padajoce po odstotku. Kasen je ta odstotek po prvi crki drzave?
+```{r}
+library(dslabs)
+dslabs::murders %>%
+  group_by(region) %>%
+  summarise(Pop=sum(population),Murders=sum(total)) %>%
+  mutate(Odstotek=Murders/Pop*100) %>%
+  arrange(desc(Odstotek))
+dslabs::murders %>%
+  mutate(Prva=str_sub(state,1,1)) %>% # ali str_extract(state,".)
+  group_by(Prva) %>%
+  summarise(Pop=sum(population),Murders=sum(total)) %>%
+  mutate(Odstotek=Murders/Pop*100) %>%
+  arrange(desc(Odstotek))
+```
+
+
+## Naloga 6 (4 tock)
+
+S pomocjo regular expressiona iz texta:
+
+\- pridobite vsa imena
+
+\- pridobite vsa stevila
+
+```{r}
+text<-"Drew has 3 watermelons, Shawn has 4 hamburgers, Karina has 12 tamales, and Anna has 6 soft pretzels"
+
+text %>%
+  str_extract_all("[A-Z][a-z]*") %>%
+  unlist()
+text %>%
+  str_extract_all("[0-9]+") %>%
+  unlist()
+```
+
+## Naloga 7 (3 tocke)
+
+Kaksna je razlika v dnevih med datumoma?
+
+```{r}
+x <- "11 th april 2012"
+y <- "April 24th 2018 11:59:59"
+
+as.Date(mdy_hms(y))-dmy(x)
+```
+
+## Naloga 8 (4 tocke)
+
+Kreirajte funkcijo, ki iz celoštevilskega vektorja vrne enice med 0 ter 9, ki niso prisotne v vektorju.Npr. Ce je X=10 22 34 148, funkcija vrne 1 3 5 6 7 9.

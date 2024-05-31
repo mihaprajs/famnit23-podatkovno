@@ -1,0 +1,183 @@
+
+---
+title: "Izpit september 2022 (90 min)"
+author: "Ime Priimek"
+date: "`r Sys.Date()`"
+output: 
+  html_document: 
+    toc: yes
+    toc_float: yes
+---
+
+
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo=TRUE, message=FALSE, warning = FALSE)
+
+```
+
+## Uvod
+
+Reši naloge, knitaj markdown v html datoteko in jo naloži na e-učilnico. Nastavite Rmarkdown tako, da sta vidna koda in izhod, vendar skrijete vsa opozorila in sporočila. Nastavite ga tudi tako, da se html ustvari ne glede na napake v kodi. Če imate dane vzorčne podatke, morajo biti vaše rešitve razširljive na večje primere.
+
+Srečno!
+
+
+
+## Problem 1
+
+Dan je data.frame z nekaterimi dogodki in njihovimi datumi. Razvrsti vrstice od najbolj zgodnje do najkasnejše!
+
+
+```{r}
+p1<-data.frame(Event=c("World cup","Ozivela ulica","Euro Math Congress","Summer school Rogla","Final exams","HL3 release date"),Year=c(2022,2021,2004,2022,1999,2077),Day=c(11,2,30,14,5,6),Month=c(12,3,4,7,10,10),stringsAsFactors=F)
+```
+
+
+
+
+## Problem 2
+
+Napišite funkcijo, ki za dan data.frame vrne isti data.frame ampak samo s stolpci, ki ne vsebujejo NA vrednosti. Poženite svojo funkcijo na data.frame-u **airquality**.
+
+```{r}
+library(tidyverse)
+p2<-\(df){
+  df %>%
+    select_if(\(x){
+      !is.na(max(x))
+    })
+}
+p2(airquality)
+```
+
+
+
+
+
+
+## Problem 3
+
+Ustvarite data.frame z naslednjimi stolpci:
+ID, ime, priimek, naslov. Vrednosti je treba vzeti iz podanega besedila.
+
+
+```{r}
+p3<-"P0001 Julie Zion 6754 Lakeview Dr. Coral Springs
+P0002 Britta Zarinsky 4532 Maplewood Dr. Coral Springs
+P0003 Jenna Moldof 100 Oak Lane Coral Springs
+P0004 Melissa Kimble 1101 Ramblewood Rd. Coral Springs
+P0005 Jessica Anderson 1345 University Dr. Coral Springs
+P0006 Leslie Ericson 8922 Coral Ridge Dr. Coral Springs
+P0007 Jessica Goodman 3800 Westview Dr. Coral Springs
+P0008 Marci Barber 4545 Westview Dr. Coral Springs
+P0009 Nancy Dorman 900 Ramblewood Rd Coral Springs
+P0010 Julie Fraser 4566 Parkside Dr. Coral Springs
+P0011 Kelly James 800 Coral Springs Dr. Coral Springs
+P0012 Sherrie Green 6600 Main Street Coral Springs
+P0013 Priscilla Pearson 2450 Maplewood Dr. Coral Springs
+P0014 Kerri Stone 550 Sample Road Coral Springs
+P0015 Toni Moldof 522 Coral Springs Dr. Coral Springs
+P0016 Shelly Parker 1001 Coral Ridge Dr. Coral Springs
+P0017 Amy Kinzer 922 Sample Road Coral Springs
+P0018 Mary Citron 500 Oak Lane Coral Springs
+P0019 Jessica Grauer 1881 Vestal Road Coral Springs
+P0020 Sonja Freed 2210 Main Street Coral Springs
+P0021 Lori Pryor 2001 Parkside Dr. Coral Springs
+P0022 Lauren Howard 1520 University Dr. Coral Springs
+P0023 Katie Remmen 2200 Cedarwood Dr. Coral Springs
+P0024 Katherine Akong 1705 Ramblewood Dr. Coral Springs
+P0025 Lilly Taboas 1025 Coral Springs Dr. Coral Springs"
+```
+
+
+
+
+
+## Problem 4
+
+Dan je seznam data.frame-ov. Vrni (poimenovani) vektor z največjo vrednostjo vsakega numeričnega stolpca. Imena elementov morajo biti enaka imenom ustreznih stolpcev. Iz rešitve izpustite neštevilske stolpce.
+
+
+```{r}
+p4<-list(mtcars,iris,airquality)
+```
+
+
+
+
+
+
+
+## Problem 5
+
+V priloženi datoteki **OrderDatabase.xlsx** so 3 delovni listi, od katerih vsak vsebuje data.frame.
+Kolikšen je skupni prihodek artiklov, naročenih dne 3.3.2006?
+
+```{r}
+getwd()
+dir(pattern = "OrderDatabase",recursive = T)->filename
+filename %>% readxl::excel_sheets() %>% sapply(\(x){readxl::read_excel(filename,sheet=x)})->L
+L$orders %>%
+  inner_join(L$orderline) %>%
+  inner_join(L$stock) %>%
+  select(OrderDate,Qty,UnitCost) %>%
+  filter(OrderDate==dmy("3. 3. 2006")) %>%
+  {sum(.$Qty*.$UnitCost)}
+
+```
+
+
+
+
+
+
+## Problem 6
+
+Glede na data.frame **tidyr::billboard** prikaži 5 najpogosteje uporabljenih besed v imenih pesmi skupaj z njihovim številom (kombinacije, kot so "Can't", naj štejejo kot 1 beseda za ta problem).
+```{r}
+tidyr::billboard %>%
+  .$track %>%
+  str_split("[^A-Za-z0-9'-]") %>%
+  unlist() %>%
+  .[.!=""] %>%
+  factor() %>%
+  summary() %>%
+  #.[order(-.)]
+  .[1:5]
+```
+
+
+
+
+
+
+
+## Problem 7
+
+Dan je data.frame o Titaniku https://vincentarelbundock.github.io/Rdatasets/csv/COUNT/titanic.csv
+, potniški ladji, potopljeni leta 1912. Raziščite, ali so med potniki, ko je prišlo na pomoč, res imele prednost "ženske in otroci" pred "moškimi". Narišite histogram štirih skupin (vsaka kombinacija starosti in spola), ki prikazuje odstotek preživelih izmed populacije te skupine.
+
+
+```{r}
+"https://vincentarelbundock.github.io/Rdatasets/csv/COUNT/titanic.csv" %>% 
+  read.csv() %>%
+  group_by(age,sex) %>%
+  summarise(Skupaj=n(),
+            Preziveli=sum(survived=="yes"), # ali Preziveli=sum(ifelse(survived=="yes",1,0))
+            Procent=Preziveli/Skupaj*100) %>%
+  {print(.);.} %>% # sprinta vmesni rezultat
+  ggplot()+
+  aes(x=paste(age,sex),weight=Procent)+
+  geom_bar()
+  
+```
+
+
+
+
+
+
+
+
+
