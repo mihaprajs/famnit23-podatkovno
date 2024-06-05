@@ -1,0 +1,79 @@
+---
+title: "Podatkovno programiranje"
+subtitle: "Domača naloga 5"
+author: "Miha Prajs"
+date: "`r format(Sys.time(), '%e %B %Y')`"
+format: 
+  html:
+    embed-resources: true
+execute: 
+  warning: false
+  messages: false
+  echo: true
+  error: true
+---
+## Vprašanja
+
+1. Prikažite število smrtnih žrtev po zveznih državah (obvezna uporaba celotnih imen zveznih držav). Rezultate nato še prikažite s histogramom.
+2. S histogramom izrišite smrtne žrtve glede na raso, za vsak spol. Rešite v celoti z Rjem, ne z markdown/quarto!
+3. Narišite obris ZDA z razpršlnim grafikonom krajev smrti.
+
+
+## Rešitve
+```{r}
+library(tidyverse)
+library(gt)
+library(janitor)
+library(readr)
+library(esquisse)
+unzip("archive.zip")
+dataset<-read.csv("dataset.csv",
+                  sep=";")
+state_abbr_and_pop<-read.csv("state_abbreviations_and_populations.csv",
+                             sep=";")
+```
+
+
+### 1. vprašanje
+Prikažite število smrtnih žrtev po zveznih državah (obvezna uporaba celotnih imen zveznih držav). Rezultate nato še prikažite s histogramom.
+```{r}
+dataset<-dataset[-nrow(dataset),]
+dataset1<-dataset[order(dataset$State),]
+df1<-dataset1 |>
+  summarise(.by=State,n=n())
+df2<-state_abbr_and_pop |>
+  inner_join(df1,by=c("Abbreviation"="State"))
+df3<-df2 |>
+  select(Name,n) |>
+  as_tibble()
+df3
+ggplot(df3)+
+  aes(y=Name,x=n)+
+  geom_bar(stat = "identity")+
+  ylab("State")+
+  xlab("Count")
+```
+
+### 2. vprašanje
+S histogramom izrišite smrtne žrtve glede na raso, za vsak spol. Rešite v celoti z Rjem, ne z markdown/quarto!
+```{r}
+dataset2<-dataset[order(dataset$Gender),]
+df4<-dataset2 |>
+  select(Gender,Race) 
+ggplot(df4)+
+  aes(y=Race)+
+  geom_bar()+
+  facet_wrap(~ Gender,scales="free_x")
+```
+### 3. vprašanje
+Narišite obris ZDA z razpršlnim grafikonom krajev smrti.
+```{r}
+df5<-dataset |>
+  select(Latitude,Longitude)
+df5$Latitude<-as.numeric(dataset$Latitude)
+df5$Longitude<-as.numeric(dataset$Longitude)
+ggplot(df5)+
+  aes(x=Longitude,y=Latitude)+
+  geom_point()
+```
+
