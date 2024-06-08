@@ -10,7 +10,7 @@ Practice assistant: dr. Peter Muršič
 
 ## Intro
 
-The repository serves as a personal archive of all code written during the course of Data Programming at UP FAMNIT. The code is written in Python or R, using VS Code and R Studio as the IDEs.
+The repository serves as a personal archive of all code written during the course of Data Programming at UP FAMNIT. The code is written in R, using VS Code and R Studio as the IDEs.
 
 **!!! Code in this repository is a wild mix of genius and "oopsie doopsies" - it’s shared !!! after !!! submitting my assignments, so expect adventures (and bugs). Use or copy at your risk !!!**
 
