@@ -20,7 +20,7 @@ sapply(pkgs.to.remove, remove.packages, lib = path.lib)
 # Install new packages
 # restart if needed
 installandload<-function(
-    normalpackages=c("rlang","tidyverse","readxl","writexl","lubridate","esquisse","miniUI","markdown","shiny","DT","gt","knitr","janeaustenr","tidytext","psych","gtExtras","dataMaid","arrow","skimr","janitor","gtsummary","lattice","ggthemes","extrafont","ggrepel","patchwork","gganimate","gifski","gapminder","stringr","lavaan")){
+    normalpackages=c("rlang","tidyverse","readxl","writexl","lubridate","esquisse","miniUI","markdown","shiny","DT","gt","knitr","citation","janeaustenr","tidytext","psych","gtExtras","dataMaid","arrow","skimr","janitor","gtsummary","lattice","ggthemes","extrafont","ggrepel","patchwork","gganimate","gifski","gapminder","stringr","lavaan")){
   new.packages <- normalpackages[!(normalpackages %in% installed.packages()[,"Package"])]
   if(length(new.packages)>0) {install.packages(new.packages,dependencies =T,quiet = F)}
   invisible(lapply(normalpackages,function(x){
