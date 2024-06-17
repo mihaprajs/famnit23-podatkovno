@@ -19,8 +19,9 @@ The repository serves as a personal archive of all code written during the cours
 ## Folder structure
 
 1. Classification based on class type:
-    - `class` - Contains code from lectures, that was written during the class.
+    - `class` - Contains code from lectures, that was written during the class
     - `practice` - Contains code from lab practice
+    - `HW` - Contains homeworks
 
 2. Organised code by dates (yyyy-mm-dd).
 
